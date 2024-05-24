@@ -34,3 +34,19 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+
+  deploy:
+            needs: [build]
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout repository
+                uses: actions/checkout@v3
+                with:
+                  fetch-depth: 0
+              - name: Deploy to DigitalOcean
+                if: ${{ github.event_name == 'push' }}
+                env:
+                  DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+                run: |
+                    curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" https://api.digitalocean.com/v2/apps/$APP_ID/deployments 
