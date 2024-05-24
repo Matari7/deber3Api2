@@ -1,5 +1,6 @@
 const http = require('http');
 const axios = require('axios');
+const PORT = process.env.PORT || 5000
 
 const API_URL = 'https://jsonplaceholder.typicode.com/';
 
@@ -21,8 +22,9 @@ const server = http.createServer((req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
 server.listen(PORT, () => {
   console.log(`Servidor en ejecución en el puerto ${PORT}`);
 });
