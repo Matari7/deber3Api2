@@ -1,7 +1,7 @@
 const http = require('https');
 const axios = require('axios');
 
-const API_URL = 'https://jsonplaceholder.typicode.com/';
+const API_URL = 'https://jsonplaceholder.typicode.com';
 
 const server = http.createServer((req, res) => {
   if (req.url === '/users') {
