@@ -1,9 +1,9 @@
-const http = require('https');
+const https = require('https');
 const axios = require('axios');
 
 const API_URL = 'https://jsonplaceholder.typicode.com';
 
-const server = http.createServer((req, res) => {
+const server = https.createServer((req, res) => {
   if (req.url === '/users') {
     axios.get(`${API_URL}/users`)
       .then(response => {
